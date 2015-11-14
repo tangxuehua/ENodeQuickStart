@@ -3,6 +3,7 @@ using ECommon.Components;
 using ECommon.Dapper;
 using ECommon.IO;
 using ENode.Infrastructure;
+using NoteSample.Common;
 using NoteSample.Domain;
 
 namespace NoteSample.Denormalizers
@@ -25,7 +26,7 @@ namespace NoteSample.Denormalizers
                     UpdatedOn = evnt.Timestamp,
                     Version = evnt.Version,
                     EventSequence = evnt.Sequence
-                }, "Note");
+                }, ConfigSettings.NoteTable);
             });
         }
         public Task<AsyncTaskResult> HandleAsync(NoteTitleChangedEvent evnt)
@@ -42,7 +43,7 @@ namespace NoteSample.Denormalizers
                 {
                     Id = evnt.AggregateRootId,
                     Version = evnt.Version - 1
-                }, "Note");
+                }, ConfigSettings.NoteTable);
             });
         }
     }

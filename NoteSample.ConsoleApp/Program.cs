@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Reflection;
 using ECommon.Autofac;
 using ECommon.Components;
 using ECommon.Configurations;
+using ECommon.Dapper;
 using ECommon.JsonNet;
 using ECommon.Log4Net;
 using ECommon.Logging;
@@ -41,6 +44,14 @@ namespace NoteSample.ConsoleApp
             _logger.Info("Updating Note");
             commandService.ExecuteAsync(command2, CommandReturnType.EventHandled).Wait();
             _logger.Info("Note update success.");
+
+            Console.WriteLine(string.Empty);
+
+            using (var connection = new SqlConnection(ConfigSettings.ConnectionString))
+            {
+                var note = connection.QueryList(new { Id = noteId }, ConfigSettings.NoteTable).Single();
+                _logger.InfoFormat("Note from ReadDB, id: {0}, title: {1}, version: {2}", note.Id, note.Title, note.Version);
+            }
 
             Console.WriteLine(string.Empty);
 
