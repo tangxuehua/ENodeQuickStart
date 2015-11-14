@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D4B17C7-5595-42E6-9A23-FA1E6741092C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NoteSample.ConsoleApp</RootNamespace>
+    <AssemblyName>NoteSample.ConsoleApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ECommon">
+      <HintPath>..\packages\ECommon.1.5.5\lib\net45\ECommon.dll</HintPath>
+    </Reference>
+    <Reference Include="ECommon.Autofac">
+      <HintPath>..\packages\ECommon.Autofac.1.5.5\lib\net45\ECommon.Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ECommon.Dapper">
+      <HintPath>..\packages\ECommon.Dapper.1.5.5\lib\net45\ECommon.Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ECommon.JsonNet">
+      <HintPath>..\packages\ECommon.JsonNet.1.5.5\lib\net45\ECommon.JsonNet.dll</HintPath>
+    </Reference>
+    <Reference Include="ECommon.Log4Net">
+      <HintPath>..\packages\ECommon.Log4Net.1.5.5\lib\net45\ECommon.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ENode">
+      <HintPath>..\packages\ENode.2.6.8\lib\net45\ENode.dll</HintPath>
+    </Reference>
+    <Reference Include="ENode.EQueue">
+      <HintPath>..\packages\ENode.EQueue.1.6.9\lib\net45\ENode.EQueue.dll</HintPath>
+    </Reference>
+    <Reference Include="EQueue">
+      <HintPath>..\packages\EQueue.2.0.3\lib\net45\EQueue.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Providers\CommandTopicProvider.cs" />
+    <Compile Include="ENodeExtensions.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\DomainEventTopicProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NoteSample.CommandHandlers\NoteSample.CommandHandlers.csproj">
+      <Project>{8f64e271-80b5-490a-9799-eb3efe18134e}</Project>
+      <Name>NoteSample.CommandHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NoteSample.Commands\NoteSample.Commands.csproj">
+      <Project>{dfcf3311-26d7-4db9-954e-876eac6d4407}</Project>
+      <Name>NoteSample.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NoteSample.Common\NoteSample.Common.csproj">
+      <Project>{604695bc-616a-4dd1-97fa-2a855e563099}</Project>
+      <Name>NoteSample.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NoteSample.Denormalizers\NoteSample.Denormalizers.csproj">
+      <Project>{85c4e189-55bb-4a42-b738-a3b32bef6872}</Project>
+      <Name>NoteSample.Denormalizers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NoteSample.Domain\NoteSample.Domain.csproj">
+      <Project>{f9654065-3cdd-4260-bcc8-29e61467fe24}</Project>
+      <Name>NoteSample.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
